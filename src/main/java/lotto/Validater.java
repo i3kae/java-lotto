@@ -43,18 +43,6 @@ public class Validater {
         strEmptyCheck(inputStr);
         strNumericCheck(inputStr, List.of(DIVIDING_POINT));
         strSplitedCheck(inputStr, DIVIDING_POINT);
-        dividingSizeCheck(inputStr.split(DIVIDING_POINT), MAX_LOTTO_SIZE);
-        if (Arrays.stream(inputStr.split(DIVIDING_POINT)).distinct().count() != inputStr.split(DIVIDING_POINT).length){
-            Print.printMessage(ErrorMessage.DUPLICATED_NUMBER.getMessage());
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATED_NUMBER.getMessage());
-        }
-        for (String splited : inputStr.split(DIVIDING_POINT)){
-            System.out.println(splited);
-            if (Integer.parseInt(splited) < LOTTO_MIN_VALUE || LOTTO_MAX_VALUE < Integer.parseInt(splited)){
-                Print.printMessage(ErrorMessage.NOT_IN_1_TO_45.getMessage());
-                throw new IllegalArgumentException(ErrorMessage.NOT_IN_1_TO_45.getMessage());
-            }
-        }
     }
 
     private void strEmptyCheck(String str){

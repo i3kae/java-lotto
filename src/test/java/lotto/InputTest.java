@@ -1,5 +1,6 @@
 package lotto;
 
+import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -150,6 +151,32 @@ public class InputTest {
         assertThatThrownBy(() -> input.winningNumbersInput("0,1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> input.winningNumbersInput("41,42,43,44,45,46"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+    @DisplayName("당첨 번호 입력시 숫자가 6개 포함되지 않은 문자열의 입력")
+    @Test
+    void overSizeWinningNumberInput() {
+        Input input = new Input();
+
+        assertThatThrownBy(() -> input.winningNumbersInput("1,2,3,4,5"))
+                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> input.winningNumbersInput("1,2,3,4,5,6,7,8"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+    @DisplayName("당첨 번호 입력시 중복된 숫자를 포함한 문자열의 입력")
+    @Test
+    void duplicatedNumberWinningNumberInput() {
+        Input input = new Input();
+
+        assertThatThrownBy(() -> input.winningNumbersInput("1,1,2,3,4,5"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+    @DisplayName("보너스 번호와 당첨 번호가 중복된 숫자 문자열의 입력")
+    @Test
+    void duplicatedBonusNumberInput() {
+        Input input = new Input();
+
+        assertThatThrownBy(() -> input.bonusNumberInput("1,1,2,3,4,5"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
